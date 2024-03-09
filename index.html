@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+   <meta charset="utf-8">
+   <title>COMP5347 Assignment One</title>
+   <link rel="stylesheet" href="index.css" />
+   <!-- We are deferring the script being loaded because we need the full html document to be loaded first -->
+   <script defer type="text/javascript" src="index.js"></script> 
+</head>
+<body>
+   <div id="main-heading">
+      <h1>Cartoonopia</h1>
+      <p>The home of characters and cartoons!</p>
+   </div>
+
+   <div class="background-image-blur-whitewash"></div>
+   <div>
+      <form id="search-form">
+         <input id="search-input" type="text" placeholder="Search Characters">
+      </form>
+   </div>
+
+   <div id="top-section">
+
+      <div id="filters">
+         <p>Filters</p>
+         <div class="underline"></div>
+      </div>
+
+      <div id="selector"> <!-- id to give positioning of table as a flex item -->
+         <table id="character-table">
+            
+            <thead> <!-- table header section as we are using tbody which is affected by JS -->
+               <tr>
+                  <th>Name</th>
+                  <th>Strength</th>
+                  <th>Speed</th>
+                  <th>Skill</th>
+                  <th>Fear Factor</th>
+                  <th>Power</th>
+                  <th>Intelligence</th>
+                  <th>Wealth</th>
+                  <th>Selected</th>
+               </tr>
+            </thead>
+
+            <tbody id="character-table-body">
+               <!-- dynamically udpated by JS -->
+            </tbody>
+
+         </table>
+      </div>
+
+      <div id="previous">
+         <p>Right Hold</p>
+      </div>
+
+   </div>
+   
+</body>
+</html>
