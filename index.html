@@ -4,8 +4,7 @@
    <meta charset="utf-8">
    <title>COMP5347 Assignment One</title>
    <link rel="stylesheet" href="index.css" />
-   <!-- We are deferring the script being loaded because we need the full html document to be loaded first -->
-   <script defer type="text/javascript" src="index.js"></script> 
+   <!-- <script defer type="text/javascript" src="index.js"></script>  -->
 </head>
 <body>
    <div id="main-heading">
@@ -15,9 +14,9 @@
 
    <div class="background-image-blur-whitewash"></div>
    <div>
-      <form id="search-form">
-         <input id="search-input" type="text" placeholder="Search Characters">
-      </form>
+      <div id="search-form">
+         <input id="search-input" type="text" placeholder="Search Characters" autocomplete="off">
+      </div>
    </div>
 
    <div id="top-section">
@@ -56,6 +55,24 @@
       </div>
 
    </div>
+
+   <div id="comparison-section">
+      <div class="comparison-slot" id="comparison-left">
+         <p id="name-left"> Unknown</p>
+         <img id="image-left" src="images/unknown-character.png" alt="Left Character"/> 
+      </div>
+      <div class="comparison-slot" id="comparison-right">
+         <p id="name-right"> Unknown</p>
+         <img id="image-right" src="images/unknown-character.png" alt="Right Character"/>
+      </div>
+   </div>
+
+   <div id ="results">
+      <p>results here</p>
+   </div>
+
+   <!-- Load script at the end... apparently a more modern way to do this -->
+   <script type="text/javascript" src="index.js"></script> 
    
 </body>
 </html>

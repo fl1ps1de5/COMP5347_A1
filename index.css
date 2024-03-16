@@ -134,3 +134,24 @@ td {
    width: 13.375rem; 
 }
 
+#comparison-section {
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   background-color: rgb(31, 31, 31);
+   padding: 1.25rem;
+   height: 20rem;
+}
+
+.comparison-slot img {
+   width: 15rem; 
+   height: 15rem; 
+   border-radius: 50%;
+   background-color: white; 
+}
+
+.comparison-slot p {
+   color: white;
+   text-align: center;
+   /* font-size: 3rem; */
+}
