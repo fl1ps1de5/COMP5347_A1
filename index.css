@@ -155,3 +155,54 @@ td {
    text-align: center;
    /* font-size: 3rem; */
 }
+
+/* ALL CSS RELATING TO FILTER SLIDERS BELOW */
+
+.slider-control {
+   position: relative;
+   margin-top: 20px;
+   min-height: 3rem;
+   padding-left: 2rem;
+}
+
+#FROMslider{
+   height: 0;
+   z-index: 3;
+   position: absolute;
+   -webkit-appearance: none;
+   appearance: none;
+}
+
+#TOslider {
+   -webkit-appearance: none;
+   appearance: none;
+   position: absolute;
+   z-index: 2;
+ }
+
+input[type="range"] {
+   /* remove default styling */
+   -webkit-appearance: none;
+   appearance: none;
+   pointer-events: none;
+   
+   /* style the track */
+   margin-left: 4rem;
+   height: 0.1rem;
+   width: 50%;
+   background-color: rgb(229, 229, 229);
+}
+
+/* firefox thumb */
+input[type="range"]::-moz-range-thumb {
+   pointer-events: auto;
+}
+
+/* webkit thumb */
+input[type="range"]::-webkit-slider-thumb {
+   pointer-events: auto;
+}
+
+
+
+ 

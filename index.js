@@ -1,11 +1,25 @@
-// listening to searches
-document.getElementById("search-input").addEventListener("input", processSearch);
+// get JSON object
+function getJsonObject(path, success, error) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+              if (success) success(JSON.parse(xhr.responseText));
+          } else {
+              if (error) error(xhr);
+          }
+      }
+  };
+  xhr.open("GET", path, true);
+  xhr.send();
+}
 
-// assuming tableBody is available when this script runs (script is called at end of html)
-document.getElementById('character-table-body').addEventListener('change', function(event) {
-  if (event.target.type === 'checkbox') {
-    handleCheckboxChange(event.target);
-  }
+// read JSON data
+getJsonObject('data.json', function(data) {
+  charactersData = data.Characters; // Save the data for later
+  populateTable(charactersData); // Populate the table with all characters initially
+}, function(xhr) {
+  console.error("Failed to fetch data:", xhr);
 });
 
 function processSearch(event) {
@@ -57,7 +71,6 @@ function handleCheckboxChange(checkbox) {
 }
 
 function updateCharacterComparison(){
-  
   // start by resetting comparisons and ge
   resetComparison('left');
   resetComparison('right');
@@ -95,51 +108,39 @@ function search(searchValue) {
 function populateTable(data) {
   const tableBody = document.getElementById('character-table-body');
   let tableHTML = '';
-
-  data.forEach(character => {
-    const isChecked = checkboxStates[character.name] ? 'checked' : '';
-    const htmlCheck = `<td><input type="checkbox" id="${character.name}" ${isChecked}/></td>`;
-    tableHTML += `
-      <tr>
-        <td>${character.name}</td>
-        <td>${character.strength}</td>
-        <td>${character.speed}</td>
-        <td>${character.skill}</td>
-        <td>${character.fear_factor}</td>
-        <td>${character.power}</td>
-        <td>${character.intelligence}</td>
-        <td>${character.wealth}</td>
-        ${htmlCheck}
-      </tr>
-    `;
-  });
+  if (data.length == 0){
+    tableHTML = '<tr><td colspan="9" style="text-align:center;">No results found</td></tr>';
+  }else{
+    data.forEach(character => {
+      const isChecked = checkboxStates[character.name] ? 'checked' : '';
+      const htmlCheck = `<td><input type="checkbox" id="${character.name}" ${isChecked}/></td>`;
+      tableHTML += `
+        <tr>
+          <td>${character.name}</td>
+          <td>${character.strength}</td>
+          <td>${character.speed}</td>
+          <td>${character.skill}</td>
+          <td>${character.fear_factor}</td>
+          <td>${character.power}</td>
+          <td>${character.intelligence}</td>
+          <td>${character.wealth}</td>
+          ${htmlCheck}
+        </tr>
+      `;
+    })
+  };
 
   tableBody.innerHTML = tableHTML;
   enableDisableCheckbox();
 }
 
+// listening to searches
+document.getElementById("search-input").addEventListener("input", processSearch);
 
-// get JSON object
-function getJsonObject(path, success, error) {
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 200) {
-              if (success) success(JSON.parse(xhr.responseText));
-          } else {
-              if (error) error(xhr);
-          }
-      }
-  };
-  xhr.open("GET", path, true);
-  xhr.send();
-}
-
-// read JSON data
-getJsonObject('data.json', function(data) {
-  charactersData = data.Characters; // Save the data for later
-  populateTable(charactersData); // Populate the table with all characters initially
-}, function(xhr) {
-  console.error("Failed to fetch data:", xhr);
+// assuming tableBody is available when this script runs (script is called at end of html)
+// handle checkbox changes for all checkboxes
+document.getElementById('character-table-body').addEventListener('change', function(event) {
+  if (event.target.type === 'checkbox') {
+    handleCheckboxChange(event.target);
+  }
 });
-

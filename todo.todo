@@ -2,10 +2,10 @@
 Search bar:
     ✔ Get whitespace to behave correctly @done(24-03-14 15:24)
     ✔ Make search return the correct results @done(24-03-14 15:24)
-    ☐ No results found
+    ✔ No results found @done(24-03-16 18:38)
 
 Filters: 
-    ☐ Get the HTML/CSS to work - display right
+    ☐ Get the HTML/CSS to work (display correctly)
     ☐ Make them actually functional
 
 Selection:
@@ -20,9 +20,13 @@ Previous selections:
     ☐ No duplicates
 
 Produce "top trumps" results:
-    ☐ Get the ticks in there
-    ☐ Logic shouldnt be too bad
+    ☐ Get the HTML/CSS to work (display correctly)
+    ☐ Get the ticks in there (based on the stats)
+    ☐ Edge cases?
 
 Readme:
-    ☐ Include image sources
+    ☐ Include image sources 
+        ☐ Unknown image
+    ☐ Include other references?
+        ☐ Dual range slider
     
