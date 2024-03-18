@@ -1,6 +1,6 @@
 h1, h2, h3, nav, footer {
     font-family: Trebuchet MS, sans-serif;
-   }
+}
    
 body {
    font-family: "Lucida Sans", Verdana, Arial, sans-serif;
@@ -158,32 +158,57 @@ td {
 
 /* ALL CSS RELATING TO FILTER SLIDERS BELOW */
 
-.slider-control {
+.slider-controls {
    position: relative;
    margin-top: 20px;
-   min-height: 3rem;
-   padding-left: 2rem;
+   min-height: 1rem;
+   padding-left: 1.8rem;
 }
 
-#FROMslider{
+.slider-controls label {
+   position: absolute;
+   font-size: 0.6rem; 
+   color: black;
+   margin: 0; /* remove any default margin */
+   left: 1rem;
+   bottom: 0.4rem;
+   font-weight: bold;
+}
+
+.slider-value-display {
+   z-index: 4;
+   position: absolute;
+   background-color: #fff;
+   color: #000;
+   border-radius: 4px;
+   border: 1px solid #ddd;
+   font-size: 0.5rem;
+   transform: translate(-50%, -100%); /* Center above the slider handle */
+   white-space: nowrap;
+ }
+
+/* for some reason this did not work with classes, so I used ID's... sorry */
+#strengthFrom, #speedFrom, #skillFrom, #fear_factorFrom, #powerFrom, #intelligenceFrom, #wealthFrom{
    height: 0;
-   z-index: 3;
+   z-index: 2;
    position: absolute;
    -webkit-appearance: none;
    appearance: none;
 }
 
-#TOslider {
+#strengthTo, #speedTo, #skillTo, #fear_factorTo, #powerTo, #intelligenceTo, #wealthTo {
+   z-index: 1;
+   position: absolute;
    -webkit-appearance: none;
    appearance: none;
-   position: absolute;
-   z-index: 2;
  }
 
 input[type="range"] {
    /* remove default styling */
    -webkit-appearance: none;
    appearance: none;
+   
+   /* so we cant click on the track */
    pointer-events: none;
    
    /* style the track */
@@ -196,13 +221,50 @@ input[type="range"] {
 /* firefox thumb */
 input[type="range"]::-moz-range-thumb {
    pointer-events: auto;
+   background: white;
+   background-color: white;
+   width: 1rem;
+   height: 1rem;
+   border-radius: 50%;
+   border: 0.1rem solid black;
 }
 
 /* webkit thumb */
 input[type="range"]::-webkit-slider-thumb {
+   -webkit-appearance: none;
    pointer-events: auto;
+   background: white;
+   background-color: white;
+   width: 1rem;
+   height: 1rem;
+   border-radius: 50%;
+   border: 0.1rem solid black;
+}
+
+#results {
+   background-color: rgb(31, 31, 31);
+   color: #ddd;
+   justify-content: center;
+   text-align: center;
+   margin-top: 1.2rem;
+   margin-left: 15rem;
+   margin-right: 15rem;
+   margin-bottom: 1.2rem;
+   padding-top: 20px;
+   padding-bottom: 20px;
+}
+
+.attribute {
+   font-size: large;
+   font-weight: bold;
+   padding: 0.5rem;
 }
 
 
+.left-side {
+   text-align: right;
+}
 
- 
+.right-side {
+   text-align: left;
+}

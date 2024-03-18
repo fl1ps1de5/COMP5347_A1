@@ -22,14 +22,53 @@
    <div id="top-section">
 
       <div id="filters">
+
          <p>Filters</p>
          <div class="underline"></div>
-         
-         <div class="slider-control">
-            <input id="FROMslider" type="range" value="10" min="0" max="100">
-            <input id="TOslider" type="range" value="80" min="0" max="100">
+
+         <div class="slider-controls">
+            <label>Strength</label>
+            <input class="fromBit" id="strengthFrom" type="range" value="0" min="0" max="100">
+            <span id="strengthFromValue" class="slider-value"></span>
+            <input class="toBit" id="strengthTo" type="range" value="100" min="0" max="100">
+            <span id="strengthToValue" class="slider-value"></span>
          </div>
 
+         <div class="slider-controls">
+            <label>Speed</label>
+            <input class="fromBit" id="speedFrom" type="range" value="0" min="0" max="100">
+            <input class="toBit" id="speedTo" type="range" value="100" min="0" max="100">
+         </div>
+
+         <div class="slider-controls">
+            <label>Skill</label>
+            <input class="fromBit" id="skillFrom" type="range" value="0" min="0" max="100">
+            <input class="toBit" id="skillTo" type="range" value="100" min="0" max="100">
+         </div>
+
+         <div class="slider-controls">
+            <label>Fear Factor</label>
+            <input class="fromBit" id="fear_factorFrom" type="range" value="0" min="0" max="100">
+            <input class="toBit" id="fear_factorTo" type="range" value="100" min="0" max="100">
+         </div>
+
+         <div class="slider-controls">
+            <label>Power</label>
+            <input class="fromBit" id="powerFrom" type="range" value="0" min="0" max="100">
+            <input class="toBit" id="powerTo" type="range" value="100" min="0" max="100">
+         </div>
+
+         <div class="slider-controls">
+            <label>Intelligence</label>
+            <input class="fromBit" id="intelligenceFrom" type="range" value="0" min="0" max="100">
+            <input class="toBit" id="intelligenceTo" type="range" value="100" min="0" max="100">
+         </div>
+
+         <div class="slider-controls">
+            <label>Wealth</label>
+            <input class="fromBit" id="wealthFrom" type="range" value="0" min="0" max="100">
+            <input class="toBit" id="wealthTo" type="range" value="100" min="0" max="100">
+         </div>
 
       </div>
 
@@ -74,9 +113,17 @@
       </div>
    </div>
 
-   <div id ="results">
-      <p>results here</p>
+   <div id="results">
+      <div class="attribute" data-attribute="strength">STRENGTH</div>
+      <div class="attribute" data-attribute="speed">SPEED</div>
+      <div class="attribute" data-attribute="skill">SKILL</div>
+      <div class="attribute" data-attribute="fear">FEAR</div>
+      <div class="attribute" data-attribute="power">POWER</div>
+      <div class="attribute" data-attribute="intelligence">INTELLIGENCE</div>
+      <div class="attribute" data-attribute="wealth">WEALTH</div>
    </div>
+   
+   
 
    <!-- Load script at the end... apparently a more modern way to do this -->
    <script type="text/javascript" src="index.js"></script> 

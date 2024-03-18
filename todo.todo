@@ -1,12 +1,17 @@
 
 Search bar:
-    ✔ Get whitespace to behave correctly @done(24-03-14 15:24)
+    ✔ Get whitespace to behave correctly (it should be treated like normal) @done(24-03-17 21:34)
     ✔ Make search return the correct results @done(24-03-14 15:24)
     ✔ No results found @done(24-03-16 18:38)
 
 Filters: 
-    ☐ Get the HTML/CSS to work (display correctly)
-    ☐ Make them actually functional
+    ✔ Get the HTML/CSS to work (display correctly) @done(24-03-17 18:32)
+    ✔ Get the filters to actually... filter @done(24-03-17 20:52)
+    ✔ Get the numbers to display @done(24-03-18 17:02)
+    ✔ Position the numbers correctly @done(24-03-18 17:02)
+    ☐ Get the range colour to work
+    ☐ Correct handle intercept/overlap behaviour
+    ✔ Make sure that value positions do not move with the page @done(24-03-18 17:04)
 
 Selection:
     ✔ Add selection box @done(24-03-15 11:34)
@@ -22,7 +27,6 @@ Previous selections:
 Produce "top trumps" results:
     ☐ Get the HTML/CSS to work (display correctly)
     ☐ Get the ticks in there (based on the stats)
-    ☐ Edge cases?
 
 Readme:
     ☐ Include image sources 
