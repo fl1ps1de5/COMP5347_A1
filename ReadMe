@@ -1,1 +1,24 @@
-This is my COMP5347 A1.
+This is my COMP5347 A1. 
+Author: Ethan Hirschowitz
+
+1. Apologies
+
+* Sorry for not implementing the previous comparisons section, for not completing the filters section, and for submitting slightly late 
+
+* I had some personal things come up however I am not sure if it is grounds for special consideration, but I did enjoy this project and wish I could have spent more time on it
+
+2. This webapp was developed on Firefox, but should run fine on all browsers.
+
+* The paths are all relative, and thus running the website should be fairly simple
+
+* Cd to the project directory and run "https-server"
+
+* Opening the given link should be enough to view the webpage
+
+
+3. References:
+
+* unknown-character.png was sourced from wikipedia
+
+* https://en.m.wikipedia.org/wiki/File:Unknown-human-picture.png
+

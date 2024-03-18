@@ -20,7 +20,7 @@ function getJsonObject(path, success, error) {
   };
   xhr.open("GET", path, true);
   xhr.send();
-};
+}
 
 // process searches
 function processSearch(event) {
@@ -29,7 +29,7 @@ function processSearch(event) {
     event.preventDefault();
   }
   filterAndSearch();
-};
+}
 
 function enableDisableCheckbox() {
   // Disable or enable checkboxes based on the number of selected checkboxes
@@ -37,7 +37,7 @@ function enableDisableCheckbox() {
   allCheckboxes.forEach(checkbox => {
     checkbox.disabled = !checkbox.checked && selectedChecks >= 2;
   });
-};
+}
 
 function handleCheckboxChange(checkbox) {
   const charID = checkbox.id;
@@ -53,11 +53,18 @@ function handleCheckboxChange(checkbox) {
             selectedCharacters.splice(index, 1);
         }
   }
-
-  console.log(selectedChecks);
-
+  
   updateCharacterComparison();
   enableDisableCheckbox();
+
+  if (selectedCharacters.length === 2) {
+    const characterOne = charactersData.find(c => c.name === selectedCharacters[0]);
+    const characterTwo = charactersData.find(c => c.name === selectedCharacters[1]);
+    displayComparisonResults(characterOne, characterTwo);
+  } else {
+    resertComparisonResults();
+  }
+
 }
 
 function updateCharacterComparison(){
@@ -107,12 +114,13 @@ function populateTable(data) {
         </tr>
       `;
     })
-  };
+  }
 
   tableBody.innerHTML = tableHTML;
   enableDisableCheckbox();
-};
+}
 
+// update the filter handles
 function updateFilters() {
   Object.keys(filters).forEach(filter => {
     const fromSlider = document.getElementById(`${filter}From`);
@@ -122,17 +130,18 @@ function updateFilters() {
 
     if (fromValue >= toValue) {
       if (fromSlider === document.activeElement) {
-          toSlider.value = fromValue + 1 <= toSlider.max ? fromValue + 1 : toSlider.max;
-          toValue = toSlider.value; // Update toValue after adjustment
+        fromSlider.value = toValue - 1 >= parseInt(fromSlider.min, 10) ? toValue - 1 : parseInt(fromSlider.min, 10);
+        fromValue = parseInt(fromSlider.value, 10);
       } else if (toSlider === document.activeElement) {
-          fromSlider.value = toValue - 1 >= fromSlider.min ? toValue - 1 : fromSlider.min;
-          fromValue = fromSlider.value; // Update fromValue after adjustment
-      }
-  }
+        toSlider.value = fromValue + 1 <= parseInt(toSlider.max, 10) ? fromValue + 1 : parseInt(toSlider.max, 10);
+        toValue = parseInt(toSlider.value, 10); 
+      };
+    };
 
     filters[filter].from = fromValue;
     filters[filter].to = toValue;
   });
+
   filterAndSearch();
 };
 
@@ -148,7 +157,7 @@ function filterAndSearch() {
 };
 
 // function to update or create a value display for a slider
-function updateSliderValueDisplay(slider) {
+function updateSliderValue(slider) {
   let valueDisplayId = `${slider.id}-value`;
   let valueDisplay = document.getElementById(valueDisplayId);
 
@@ -158,7 +167,7 @@ function updateSliderValueDisplay(slider) {
     valueDisplay.id = valueDisplayId;
     valueDisplay.classList.add('slider-value-display');
     document.body.appendChild(valueDisplay); // append to body to avoid positioning issues
-  }
+  };
 
   // calculate the thumb position
   const sliderWidth = slider.offsetWidth;
@@ -174,9 +183,91 @@ function updateSliderValueDisplay(slider) {
 
   // adjust the position of the value display
   valueDisplay.style.position = 'absolute';
-  valueDisplay.style.left = `${sliderRect.left + thumbOffset}px`;
-  valueDisplay.style.top = `${sliderRect.top + 0}px`; 
+  valueDisplay.style.left = `${sliderRect.left + window.scrollX + thumbOffset}px`;
+  valueDisplay.style.top = `${sliderRect.top + window.scrollY + 0}px`;
+};
+
+function displayComparisonResults(c1, c2){
+  const attributes = ['strength', 'speed', 'skill', 'fear_factor', 'power', 'intelligence', 'wealth'];
+
+  let c1winCount = 0;
+  let c2winCount = 0;
+
+  attributes.forEach(attr => {
+
+    let c1Wins, c2Wins;
+    if (c1[attr] > c2[attr]) {
+      c1Wins = true;
+      c2Wins = false;
+    } else if (c1[attr] < c2[attr]) {
+      c1Wins = false;
+      c2Wins = true;
+    } else {
+      // attributes are equal, randomly decide the winner
+      const randomWinner = Math.random() < 0.5;  // random true or false
+      c1Wins = randomWinner;
+      c2Wins = !randomWinner;
+    }
+
+    if (c1Wins) {
+      c1winCount++;
+      // If c1 wins, find the corresponding mark in left-results
+      const Wmark = document.querySelector(`#left-results .mark[data-attribute="${attr}"]`);
+      Wmark.innerHTML = '&#x2713;';
+      const Lmark = document.querySelector(`#right-results .mark[data-attribute="${attr}"]`);
+      Lmark.innerHTML = '&nbsp;'; // blank space for layout
+    } else if (c2Wins) {
+      c2winCount++;
+      // c2 wins, find the corresponding mark in right-results 
+      const Wmark = document.querySelector(`#right-results .mark[data-attribute="${attr}"]`);
+      Wmark.innerHTML = '&#x2713;'; 
+      const Lmark = document.querySelector(`#left-results .mark[data-attribute="${attr}"]`);
+      Lmark.innerHTML = '&nbsp;'; // blank space for layout
+    }
+
+  });
+
+  const leftResults = document.getElementById('left-results');
+  const rightResults = document.getElementById('right-results');
+
+  console.log(c1winCount)
+  console.log(c2winCount)
+  // now update the colour for the winner
+  if (c1winCount > c2winCount){
+    leftResults.style.backgroundColor = 'green'
+    rightResults.style.backgroundColor = 'red'
+  } else if (c1winCount < c2winCount){
+    leftResults.style.backgroundColor = 'red'
+    rightResults.style.backgroundColor = 'green'
+  } else{
+    leftResults.style.backgroundColor = 'rgb(31, 31, 31)'
+    rightResults.style.backgroundColor = 'rgb(31, 31, 31)'
+  }
+
+  comparisonHistory.push({
+    characters: [c1.name, c2.name],
+  })
 }
+
+function resertComparisonResults(){
+  const attributes = ['strength', 'speed', 'skill', 'fear_factor', 'power', 'intelligence', 'wealth'];
+  attributes.forEach(attr => {
+    const leftMark = document.querySelector(`#left-results .mark[data-attribute="${attr}"]`);
+    const rightMark = document.querySelector(`#right-results .mark[data-attribute="${attr}"]`);
+    if (leftMark && rightMark) {
+      leftMark.innerHTML = ''; 
+      rightMark.innerHTML = '';
+    }
+  });
+  const leftResults = document.getElementById('left-results');
+  const rightResults = document.getElementById('right-results');
+  leftResults.style.backgroundColor = 'rgb(31, 31, 31)'
+  rightResults.style.backgroundColor = 'rgb(31, 31, 31)'
+
+};
+
+// to store previous results
+let comparisonHistory = []
 
 // initialise variables to count the amount of selected checkboxes & object to maintain the currently selected ones
 let selectedChecks = 0;
@@ -196,7 +287,7 @@ let filters = {
 // update displays on window resize to ensure correct positioning
 window.addEventListener('resize', () => {
   document.querySelectorAll('.slider-controls input[type="range"]').forEach(input => {
-    updateSliderValueDisplay(input);
+    updateSliderValue(input);
   });
 });
 
@@ -204,11 +295,11 @@ window.addEventListener('resize', () => {
 document.querySelectorAll('.slider-controls input[type="range"]').forEach(input => {
   input.addEventListener('input', updateFilters);
 
-  updateSliderValueDisplay(input);
+  updateSliderValue(input);
 
   // add event listener for dynamic updates
   input.addEventListener('input', function() {
-    updateSliderValueDisplay(input);
+    updateSliderValue(input);
   });
 });
 
@@ -220,7 +311,8 @@ document.getElementById("search-input").addEventListener("input", processSearch)
 document.getElementById('character-table-body').addEventListener('change', function(event) {
   if (event.target.type === 'checkbox') {
     handleCheckboxChange(event.target);
-  }
+  };
 });
+
 
 
