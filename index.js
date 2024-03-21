@@ -135,15 +135,15 @@ function updateFilters() {
       } else if (toSlider === document.activeElement) {
         toSlider.value = fromValue + 1 <= parseInt(toSlider.max, 10) ? fromValue + 1 : parseInt(toSlider.max, 10);
         toValue = parseInt(toSlider.value, 10); 
-      };
-    };
+      }
+    }
 
     filters[filter].from = fromValue;
     filters[filter].to = toValue;
   });
 
   filterAndSearch();
-};
+}
 
 // no need for old search function now, i have combined filtering and searching into one
 function filterAndSearch() {
@@ -185,7 +185,7 @@ function updateSliderValue(slider) {
   valueDisplay.style.position = 'absolute';
   valueDisplay.style.left = `${sliderRect.left + window.scrollX + thumbOffset}px`;
   valueDisplay.style.top = `${sliderRect.top + window.scrollY + 0}px`;
-};
+}
 
 function displayComparisonResults(c1, c2){
   const attributes = ['strength', 'speed', 'skill', 'fear_factor', 'power', 'intelligence', 'wealth'];
@@ -207,7 +207,7 @@ function displayComparisonResults(c1, c2){
       const randomWinner = Math.random() < 0.5;  // random true or false
       c1Wins = randomWinner;
       c2Wins = !randomWinner;
-    }
+    };
 
     if (c1Wins) {
       c1winCount++;
@@ -229,9 +229,7 @@ function displayComparisonResults(c1, c2){
 
   const leftResults = document.getElementById('left-results');
   const rightResults = document.getElementById('right-results');
-
-  console.log(c1winCount)
-  console.log(c2winCount)
+  
   // now update the colour for the winner
   if (c1winCount > c2winCount){
     leftResults.style.backgroundColor = 'green'
@@ -244,9 +242,10 @@ function displayComparisonResults(c1, c2){
     rightResults.style.backgroundColor = 'rgb(31, 31, 31)'
   }
 
-  comparisonHistory.push({
-    characters: [c1.name, c2.name],
-  })
+  // comparisonHistory.push({
+  //   characters: [c1.name, c2.name],
+  // })
+  
 }
 
 function resertComparisonResults(){
@@ -264,10 +263,10 @@ function resertComparisonResults(){
   leftResults.style.backgroundColor = 'rgb(31, 31, 31)'
   rightResults.style.backgroundColor = 'rgb(31, 31, 31)'
 
-};
+}
 
 // to store previous results
-let comparisonHistory = []
+// let comparisonHistory = []
 
 // initialise variables to count the amount of selected checkboxes & object to maintain the currently selected ones
 let selectedChecks = 0;
@@ -288,7 +287,7 @@ let filters = {
 window.addEventListener('resize', () => {
   document.querySelectorAll('.slider-controls input[type="range"]').forEach(input => {
     updateSliderValue(input);
-  });
+  })
 });
 
 //listen to sliders
@@ -313,6 +312,3 @@ document.getElementById('character-table-body').addEventListener('change', funct
     handleCheckboxChange(event.target);
   };
 });
-
-
-
